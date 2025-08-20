@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using RPA.Core.Models;
+using RPA.Infrastracture.Context;
 using RPA.Infrastracture.DTOs;
 using RPA.Infrastracture.Services.Abstraction;
 using System;
@@ -21,13 +22,17 @@ namespace RPA.Infrastracture.Services.Implementation
         private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _configuration;
         //private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context; 
 
         public AuthService(UserManager<AppUser> userManager
             , IConfiguration configuration
-            , RoleManager<IdentityRole> roleManager)
+            , RoleManager<IdentityRole> roleManager
+            ,ApplicationDbContext context
+            )
         {
             _userManager = userManager;
             _configuration = configuration;
+            _context = context; 
             //_roleManager = roleManager;
         }
 

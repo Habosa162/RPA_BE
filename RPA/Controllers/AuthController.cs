@@ -64,17 +64,18 @@ namespace RPA.Controllers
             return Ok(new { success = true, jwt});  
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] DisbaleEmployeeDTO dto)
         {
-            var result = await _authService.DisableUser(id);
-            if (result!)
+            var result = await _authService.DisableUser(dto.Id);
+            if (result)
             {
-                return BadRequest(new { success = false, message = "Faild to disable user" }); 
+                return Ok(new { success = true, message = "User Disabled Successfully" });
             }
-            return Ok(new { success = true, message = "User Disabled Successfully" }); 
+            return Ok(new { success = false, message = "Faild to disable user" });
+
         }
 
-    
+
     }
 }
